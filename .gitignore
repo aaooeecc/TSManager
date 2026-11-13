@@ -1,0 +1,45 @@
+# Dependencies and generated output
+/node_modules/
+/build/
+/renderer-dist/
+/web-dist/
+/release/
+/test-results/
+*.tsbuildinfo
+
+# Local TSManager data and credentials
+/data/
+tsmanager.sqlite3
+tsmanager.sqlite3-*
+worker.key
+web-*.key
+pty-runs/
+ui-language
+ui-language.*
+ui-theme
+ui-theme.*
+
+# Local environment and signing keys
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.p12
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local editor and OS files
+/.idea/
+/.vscode/
+/.cursor/*
+!/.cursor/skills/
+/.claude/scheduled_tasks.lock
+.DS_Store
+Thumbs.db
+Desktop.ini

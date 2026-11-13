@@ -1,0 +1,86 @@
+{
+  "name": "tsmanager",
+  "version": "1.0.10",
+  "private": true,
+  "description": "Windows 本地开发项目运行管理器",
+  "author": "TSManager",
+  "main": "build/main.cjs",
+  "scripts": {
+    "dev": "npm run build:web && node scripts/dev.mjs",
+    "build:web": "npm run typecheck && npm run build:main && vite build --mode web",
+    "preview:web": "node scripts/web.mjs --build",
+    "start": "electron .",
+    "typecheck": "tsc --noEmit",
+    "build:main": "node scripts/build.mjs",
+    "build": "npm run typecheck && npm run build:main && vite build && vite build --mode web",
+    "dist": "npm run build && electron-builder --win nsis --x64 --publish never",
+    "test": "npm run build && node tests/smoke.mjs",
+    "test:ui": "npm run build && node tests/ui.mjs",
+    "test:web": "npm run build:web && node tests/web.mjs && node tests/web-legacy.mjs"
+  },
+  "dependencies": {
+    "koffi": "^3.3.7",
+    "node-pty": "1.1.0"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "electron": "45.2.1",
+    "electron-builder": "^26.18.0",
+    "esbuild": "^0.28.0",
+    "lucide-react": "^0.577.0",
+    "playwright": "^1.57.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.7",
+    "zustand": "^5.0.0"
+  },
+  "build": {
+    "appId": "local.tsmanager.desktop",
+    "productName": "TSManager",
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "files": [
+      "build/main.cjs",
+      "build/preload.cjs",
+      "build/worker.cjs",
+      "renderer-dist/**/*",
+      "web-dist/**/*",
+      "assets/icon.ico",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "**/node-pty/**/*",
+      "**/koffi/**/*",
+      "**/build/worker.cjs"
+    ],
+    "npmRebuild": false,
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico",
+      "signExecutable": false
+    },
+    "artifactName": "TSManager-Setup-${version}-${arch}.${ext}",
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "shortcutName": "TSManager"
+    }
+  }
+}

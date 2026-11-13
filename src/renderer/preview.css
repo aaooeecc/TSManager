@@ -1,0 +1,25 @@
+.preview-page .app { --workspace-top: clamp(18px, 3vh, 32px); }
+.title-bar { display: none; }
+.preview-label {
+  position: fixed;
+  top: 5px;
+  right: 17px;
+  z-index: 10;
+  color: var(--subtle, #636363);
+  font: 600 11px 'Inter Variable', 'Microsoft YaHei UI', sans-serif;
+  pointer-events: none;
+}
+body:has(.terminal-full) .preview-label { display: none; }
+.web-connection {
+  margin: 15vh auto 0;
+  width: min(440px, calc(100vw - 40px));
+  padding: 22px;
+  color: var(--text, #191919);
+  font: 13px 'Segoe UI', 'Microsoft YaHei UI', sans-serif;
+}
+.web-connection h1 { margin: 0 0 10px; font-size: 20px; }
+.web-connection p { margin: 0; color: var(--subtle, #636363); line-height: 1.6; }
+@media (max-width: 780px) {
+  body, #root { min-width: 760px; }
+  html { overflow-x: auto; }
+}
